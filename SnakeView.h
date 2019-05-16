@@ -4,18 +4,20 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Snake.h"
+#include "Button.h"
 
 class SnakeView {
 	Snake &body;
 	sf::Font arial;
 	sf::Text txt;
 	sf::Text score;
+	Button scoreValue;
 
-	sf::Texture wallTexture;
-
+	int points;
 
 	sf::RectangleShape wall;
 	sf::RectangleShape board;
+	sf::RectangleShape snuk;
 public:
 	SnakeView(Snake &b);
 

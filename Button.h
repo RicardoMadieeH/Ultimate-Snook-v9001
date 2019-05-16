@@ -23,6 +23,9 @@ public:
 	void setFont(sf::Font &fonts);
 	void setTextPosition(sf::Vector2f pos);
 	void setOutline(int thickness, sf::Color color);
+	void sizeSet(const sf::Vector2f size);
+	void setTextString(std::string txt, int size);
+	void setTextSize(int size);
 };
 
 #endif // BUTTON_H

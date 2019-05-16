@@ -65,3 +65,16 @@ void Button::setOutline(int thickness, sf::Color color) {
 	button.setOutlineThickness(thickness);
 	button.setOutlineColor(color);
 }
+
+void Button::sizeSet(const sf::Vector2f size) {
+	button.setSize(size);
+}
+
+void Button::setTextString(std::string txt, int size) {
+	text.setString(txt);
+	text.setCharacterSize(size);
+}
+
+void Button::setTextSize(int size) {
+	text.setCharacterSize(size);
+}

@@ -15,8 +15,8 @@ bool Snake::isBody(int x, int y) const {
 }
 
 void Snake::generateFruit() {
-	fruit.setX(rand() % 31);
-	fruit.setY(rand() % 21);
+	fruit.setX(5+rand() % 54);
+	fruit.setY(5+rand() % 26);
 
 	if (isBody(fruit.getX(), fruit.getY()) == true) {
 		generateFruit();
@@ -28,7 +28,7 @@ int Snake::getLength() const {
 }
 
 void Snake::startSnake() {
-	StateOfGame = RUNNING;
+	stateOfGame = RUNNING;
 	body.push_back(new Vector2i(14, 10));
 	body.push_back(new Vector2i(15, 10));
 	direction = RIGHT;
@@ -38,48 +38,56 @@ void Snake::startSnake() {
 
 void Snake::updateSnake() {
 	time = clk.getElapsedTime();
-	if (time.asSeconds() == 1) {
+	if (time.asMilliseconds() >= 1000 / 15) {
 		moveSnake();
 		eatFruit();
 
 		if (collision() == true) {
-			StateOfGame = FINISHED_LOSS;
+			stateOfGame = FINISHED_LOSS;
 		}
+		else if (getLength() == 54 * 26) {
+			stateOfGame == FINISHED_WIN;
+		}
+
 		clk.restart();
 	}
 }
 
 void Snake::turnUp() {
-	if (direction != DOWN) {
+	Vector2i temp(*body.back());
+	if (direction != DOWN && isBody(temp.getX(), temp.getY() - 1) == false) {
 		direction = UP;
 	}
 }
 
 void Snake::turnLeft() {
-	if (direction != RIGHT) {
+	Vector2i temp(*body.back());
+	if (direction != RIGHT && isBody(temp.getX() - 1, temp.getY()) == false) {
 		direction = LEFT;
 	}
 }
 
 void Snake::turnDown() {
-	if (direction != UP) {
+	Vector2i temp(*body.back());
+	if (direction != UP && isBody(temp.getX(), temp.getY() + 1) == false) {
 		direction = DOWN;
 	}
 }
 
 void Snake::turnRight() {
-	if (direction != LEFT) {
+	Vector2i temp(*body.back());
+	if (direction != LEFT && isBody(temp.getX() + 1, temp.getY()) == false) {
 		direction = RIGHT;
 	}
 }
 
 void Snake::moveSnake() {
-	if (StateOfGame == RUNNING) {
+	if (stateOfGame == RUNNING) {
 		Vector2i temp(*body.back());
 
 		if (direction == UP) {
-			body.push_back(new Vector2i(temp.getX(), temp.getY()-1));
-			if (!isGrowing){
+			body.push_back(new Vector2i(temp.getX(), temp.getY() - 1));
+			if (!isGrowing) {
 				delete body.front();
 				body.pop_front();
 			}
@@ -88,7 +96,7 @@ void Snake::moveSnake() {
 			}
 		}
 		else if (direction == LEFT) {
-			body.push_back(new Vector2i(temp.getX()-1, temp.getY()));
+			body.push_back(new Vector2i(temp.getX() - 1, temp.getY()));
 			if (!isGrowing) {
 				delete body.front();
 				body.pop_front();
@@ -108,7 +116,7 @@ void Snake::moveSnake() {
 			}
 		}
 		else if (direction == RIGHT) {
-			body.push_back(new Vector2i(temp.getX()+1, temp.getY()));
+			body.push_back(new Vector2i(temp.getX() + 1, temp.getY()));
 			if (!isGrowing) {
 				delete body.front();
 				body.pop_front();
@@ -128,13 +136,23 @@ void Snake::eatFruit() {
 }
 
 bool Snake::collision() const {
-	if (isBody(body.back()->getX(), body.back()->getY()) || body.back()->getX() > 30 || body.back()->getX() < 0 || body.back()->getY() > 20 || body.back()->getY() < 0) {
+	if (isBody(body.back()->getX(), body.back()->getY()) || body.back()->getX()*20 >= 1180 || body.back()->getX()*20 < 100 || body.back()->getY()*20 >= 620 || body.back()->getY()*20 < 100) {
 		return true;
 	}
 	return false;
 }
 
+int Snake::getFruitX() {
+	return fruit.getX();
+}
 
+int Snake::getFruitY() {
+	return fruit.getY();
+}
+
+StateOfGame Snake::getStateOfGame() {
+	return stateOfGame;
+}
 
 
 

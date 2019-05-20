@@ -8,10 +8,13 @@ class SnakeController {
 	bool finished = false;
 
 	SnakeView & view;
+	Snake &body;
 	// ... & model;
 	sf::RenderWindow &win;
+	sf::Clock clk;
+	sf::Time time;
 public:
-	explicit SnakeController(SnakeView & v, sf::RenderWindow &w);
+	explicit SnakeController(SnakeView & v, sf::RenderWindow &w, Snake &b);
 public:
 	void handleEvent(sf::Event &event);
 

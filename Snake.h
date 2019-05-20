@@ -12,9 +12,9 @@ enum Dir {UP, LEFT, DOWN, RIGHT};
 enum StateOfGame {RUNNING, FINISHED_WIN, FINISHED_LOSS};
 
 class Snake {
-	std::deque<Vector2i*> body;
+	
 	Vector2i fruit;
-	StateOfGame StateOfGame;
+	StateOfGame stateOfGame;
 	Dir direction;
 	bool isGrowing = false;
 
@@ -22,6 +22,8 @@ class Snake {
 	sf::Time time;
 
 public:
+	std::deque<Vector2i*> body;
+	
 	Snake();
 
 	void startSnake();
@@ -40,6 +42,11 @@ public:
 
 
 	void generateFruit();
+
+	int getFruitX();
+	int getFruitY();
+
+	StateOfGame getStateOfGame();
 
 };
 

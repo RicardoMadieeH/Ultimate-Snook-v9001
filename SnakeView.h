@@ -18,6 +18,12 @@ class SnakeView {
 	sf::RectangleShape wall;
 	sf::RectangleShape board;
 	sf::RectangleShape snuk;
+
+	sf::Texture cherry;
+	sf::Sprite snakeCherry;
+
+	sf::Text victory;
+	sf::Text defeat;
 public:
 	SnakeView(Snake &b);
 

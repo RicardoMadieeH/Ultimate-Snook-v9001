@@ -15,18 +15,22 @@ int main() {
 
 	sf::RenderWindow win(sf::VideoMode(1280, 720), "Ultimate Snook v9001", sf::Style::Titlebar | sf::Style::Close);
 
+	win.setFramerateLimit(60);
+
 	Snake snake;
+	snake.startSnake();
 
 	IntroView iv;
 	IntroController intro(iv, win);
 	
 	SnakeView sv(snake);
-	SnakeController game(sv, win);
+	SnakeController game(sv, win, snake);
 
 	ScoreView scv;
 	ScoreController score(scv, win);
 
-
+	sf::Clock clk;
+	sf::Time time;
 
 
 
@@ -45,6 +49,17 @@ int main() {
 			gm.handleEvent(event);
 
 		}
+		snake.updateSnake();
+		// Moving snake
+		/*
+		time = clk.getElapsedTime();
+		if (time.asMilliseconds() >= 1000 / 15)
+		{
+			snake.moveSnake();
+			snake.collision();
+			clk.restart();
+		}
+		*/
 
 		// Clear screen
 		win.clear();

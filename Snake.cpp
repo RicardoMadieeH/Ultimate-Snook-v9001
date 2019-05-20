@@ -29,6 +29,7 @@ int Snake::getLength() const {
 
 void Snake::startSnake() {
 	stateOfGame = RUNNING;
+	body.clear();
 	body.push_back(new Vector2i(14, 10));
 	body.push_back(new Vector2i(15, 10));
 	direction = RIGHT;

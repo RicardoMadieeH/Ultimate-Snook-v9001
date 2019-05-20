@@ -52,14 +52,14 @@ SnakeView::SnakeView(Snake &b) :body(b) {
 	victory.setFont(arial);
 	victory.setFillColor(sf::Color::Magenta);
 	victory.setCharacterSize(100);
-	victory.setString("VICTORY");
+	victory.setString("VICTORY\nPress a key");
 	victory.setPosition(sf::Vector2f(430, 300));
 
 	//Defeat Text settings//
 	defeat.setFont(arial);
 	defeat.setFillColor(sf::Color::Magenta);
 	defeat.setCharacterSize(100);
-	defeat.setString("DEFEAT");
+	defeat.setString("DEFEAT\nPress a key");
 	defeat.setPosition(sf::Vector2f(450, 300));
 
 }

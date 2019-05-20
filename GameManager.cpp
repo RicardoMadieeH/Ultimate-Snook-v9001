@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
-GameManager::GameManager(IntroController &ic, SnakeController &mc, ScoreController &sc)
-	: introController(ic), snakeController(mc), scoreController(sc)
+GameManager::GameManager(IntroController &ic, SnakeController &mc, ScoreController &sc, Snake &b)
+	: introController(ic), snakeController(mc), scoreController(sc), body(b)
 {
 
 	state = INTRO;
@@ -10,15 +10,22 @@ GameManager::GameManager(IntroController &ic, SnakeController &mc, ScoreControll
 void GameManager::updateState() {
 	switch (state) {
 	case INTRO:
-		if (introController.isFinished())
+		if (introController.isFinished()) {
+			body.startSnake();
 			state = GAME;
+		}
 		break;
 	case GAME:
 		if (snakeController.isFinished())
 			state = SCORE;
 		break;
 	case SCORE:
-		// oops - tu powinniœmy jakoœ zamkn¹æ aplikacjê
+		if (scoreController.isFinished()) {
+			introController.resetState();
+			snakeController.resetState();
+			scoreController.resetState();
+			state = INTRO;
+		}
 		break;
 	}
 }

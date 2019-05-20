@@ -9,9 +9,11 @@
 #include "ScoreView.h"
 #include "ScoreController.h"
 #include "GameManager.h"
+#include <ctime>
 
 
 int main() {
+	srand(time(0));
 
 	sf::RenderWindow win(sf::VideoMode(1280, 720), "Ultimate Snook v9001", sf::Style::Titlebar | sf::Style::Close);
 
@@ -26,7 +28,7 @@ int main() {
 	SnakeView sv(snake);
 	SnakeController game(sv, win, snake);
 
-	ScoreView scv;
+	ScoreView scv(snake);
 	ScoreController score(scv, win);
 
 	sf::Clock clk;
@@ -34,7 +36,7 @@ int main() {
 
 
 
-	GameManager gm(intro, game, score);
+	GameManager gm(intro, game, score, snake);
 
 	// Start the game loop
 	while (win.isOpen()) {

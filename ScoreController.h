@@ -15,6 +15,7 @@ public:
 	// no need to change this
 	void draw(sf::RenderWindow & win) { view.draw(win); }
 	bool isFinished() const { return finished; }
+	bool resetState() { finished = false; return finished; }
 };
 
 

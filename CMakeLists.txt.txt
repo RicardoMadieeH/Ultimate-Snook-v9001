@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Snuk main.cpp Button.cpp Button.h GameManager.cpp GameManager.h IntroController.cpp IntroController.h 
 IntroView.cpp IntroView.h Snake.cpp Snake.h SnakeController.cpp SnakeController.h 
-SnakeView.cpp SnakeView.h ScoreController.cpp ScoreController.h ScoreView.cpp ScoreView.h)
+SnakeView.cpp SnakeView.h ScoreController.cpp ScoreController.h ScoreView.cpp ScoreView.h Vector2i.h Vector2i.cpp)
 
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "/usr/share/SFML/cmake/Modules/" ${CMAKE_MODULE_PATH})
